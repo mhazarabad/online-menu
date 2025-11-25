@@ -2,3 +2,5 @@ django>=5
 djangorestframework
 djangorestframework-filters
 django-cors-headers
+python-decouple
+pillow
