@@ -1,0 +1,74 @@
+{% extends 'menu/base.html' %}
+{% load static %}
+{% load menu_tags %}
+
+{% block title %}Menu - Online Menu{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'menu/css/menu_list.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% if menu_data %}
+        {% for section in menu_data %}
+        <div class="menu-section fade-in">
+            <div class="category-header">
+                {% if section.category.has_icon %}
+                <img src="{{ section.category.icon.url }}" alt="{{ section.category.name }}" class="category-icon">
+                {% endif %}
+                <div>
+                    <h2 class="category-title">{{ section.category.name }}</h2>
+                    {% if section.category.description %}
+                    <p class="category-description">{{ section.category.description }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="food-grid">
+                {% for item in section.foods %}
+                <div class="food-card" onclick="window.location.href='{% url 'food_detail' item.food.id %}'">
+                    <div class="food-image-wrapper">
+                        {% if item.food.has_header_image %}
+                        <img src="{{ item.food.header_image.url }}" alt="{{ item.food.name }}" class="food-image">
+                        {% else %}
+                        <div style="display: flex; align-items: center; justify-content: center; height: 100%; background: linear-gradient(135deg, #D4AF37 0%, #FF6B35 100%); color: white; font-size: 3rem; opacity: 0.3;">
+                            <span>🍽️</span>
+                        </div>
+                        {% endif %}
+                        <div class="food-badges">
+                            {% if item.has_discount %}
+                            <span class="badge badge-discount">{{ item.food.discount|format_discount }}</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="food-content">
+                        <h3 class="food-name">{{ item.food.name }}</h3>
+                        {% if item.food.description %}
+                        <p class="food-description">{{ item.food.description }}</p>
+                        {% else %}
+                        <p class="food-description">Delicious and carefully prepared with the finest ingredients.</p>
+                        {% endif %}
+                        <div class="food-footer">
+                            <div class="price">
+                                {% if item.has_discount %}
+                                <span class="price-original">{{ item.food.price|format_price }}</span>
+                                {% endif %}
+                                <span class="price-final">{{ item.final_price|format_price }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="empty-state">
+            <h2>No Menu Items Available</h2>
+            <p>Please check back later.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
+
