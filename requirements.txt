@@ -4,3 +4,4 @@ djangorestframework-filters
 django-cors-headers
 python-decouple
 pillow
+drf-yasg
