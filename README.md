@@ -53,7 +53,7 @@ An online menu system built with Django tempaltes and Django REST Framework. Per
 
 1. Clone the repository
    ```bash
-   git clone <repository-url>
+   git clone git@github.com:mhazarabad/online-menu.git
    cd online-menu
    ```
 
@@ -105,7 +105,7 @@ An online menu system built with Django tempaltes and Django REST Framework. Per
 
 1. Clone the repository
    ```bash
-   git clone <repository-url>
+   git clone git@github.com:mhazarabad/online-menu.git
    cd online-menu
    ```
 
